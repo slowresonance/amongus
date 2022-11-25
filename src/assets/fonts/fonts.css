@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "lars";
+  font-weight: 300;
+  src: url("./lars-light.otf");
+}
+
+@font-face {
+  font-family: "lars";
+  font-weight: 300;
+  font-style: italic;
+  src: url("./lars-light-italic.otf");
+}
+
+@font-face {
+  font-family: "lars";
+  font-weight: 400;
+  src: url("./lars-regular.otf");
+}
+
+@font-face {
+  font-family: "lars";
+  font-weight: 400;
+  font-style: italic;
+  src: url("./lars-regular-italic.otf");
+}
+
+@font-face {
+  font-family: "lars";
+  font-weight: 500;
+  src: url("./lars-medium.otf");
+}
+
+@font-face {
+  font-family: "lars";
+  font-weight: 500;
+  font-style: italic;
+  src: url("./lars-medium-italic.otf");
+}
+
+@font-face {
+  font-family: "lars";
+  font-weight: 600;
+  src: url("./lars-bold.otf");
+}
+
+@font-face {
+  font-family: "lars";
+  font-weight: 600;
+  font-style: italic;
+  src: url("./lars-bold-italic.otf");
+}
