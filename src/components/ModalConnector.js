@@ -22,6 +22,8 @@ const StyledModalConnector = styled.div`
 
   cursor: pointer;
   border-radius: ${({ rounded }) => (rounded ? "30px" : "4px")};
+
+  font-weight: 400;
 `;
 
 const parseProperty = (property, value, placeholder) => {
