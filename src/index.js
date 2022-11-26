@@ -22,6 +22,9 @@ const GlobalStyle = createGlobalStyle`
 
     --yellow-color: rgba(209, 194, 139, 1);
     --yellow-background-color: rgba(234, 214, 143, 0.13);
+
+    --red-color: rgba(239, 132, 93, 1);
+    --red-background-color: rgba(255, 144, 109, 0.13);
   }
 
   body {

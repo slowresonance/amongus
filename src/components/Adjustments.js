@@ -129,12 +129,18 @@ const StyledAdjustments = styled.div`
   }
 `;
 
-const Adjustments = () => {
+const Adjustments = ({ initialValue, onClose }) => {
+  const handleClose = () => {
+    onClose(initialValue);
+  };
+
   return (
     <StyledAdjustments>
       <div className="header">
         <div className="title">Adjustments</div>
-        <div className="done">Done</div>
+        <div className="done" onClick={handleClose}>
+          Done
+        </div>
       </div>
       <div className="body">
         <div className="people">

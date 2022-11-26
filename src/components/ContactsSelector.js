@@ -162,7 +162,9 @@ const ContactsSelector = ({ type, initialValue, color, onClose }) => {
           placeholder="Search contacts"
           onKeyDown={handleKeydown}
         />
-        <div className="done">Done</div>
+        <div className="done" onClick={handleClose}>
+          Done
+        </div>
       </div>
       {type === "multi" && (
         <div className="selected">
