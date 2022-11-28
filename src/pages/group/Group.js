@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledGroup = styled.div`
   display: flex;
@@ -111,16 +112,18 @@ const group = () => {
         </div>
       </div>
       <div className="entries">
-        <div className="split">
-          <div className="left">
-            <div className="title">Breakfast</div>
-            <div className="date">November 13, 2022</div>
+        <Link to={`/group/summary/${"id"}`}>
+          <div className="split">
+            <div className="left">
+              <div className="title">Breakfast</div>
+              <div className="date">November 13, 2022</div>
+            </div>
+            <div className="right">
+              <div className="amount">0</div>
+              <div className="involvement">Not Involved</div>
+            </div>
           </div>
-          <div className="right">
-            <div className="amount">0</div>
-            <div className="involvement">Not Involved</div>
-          </div>
-        </div>
+        </Link>
         <div className="split">
           <div className="left">
             <div className="title">Breakfast</div>

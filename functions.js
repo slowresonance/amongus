@@ -6,3 +6,4 @@ add_group -> add the group to the user's groups array
 get_group_by_id -> get the group from the groups array
 get_user_by_id -> get the user from the users array
 get_split -> get the split from the splits array
+

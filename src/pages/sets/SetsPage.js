@@ -5,7 +5,7 @@ import Back from "../../components/Back";
 const SetsPage = () => {
   return (
     <>
-      <Back text="Back to Split" path="/" />
+      <Back text="Back to Split" path="/new-split" />
       <Sets />
     </>
   );

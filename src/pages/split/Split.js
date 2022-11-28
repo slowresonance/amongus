@@ -97,7 +97,7 @@ const Split = () => {
       <div className="options">
         <div className="group">
           <Menu />
-          <Link to="/sets">
+          <Link to="/new-split/sets">
             <Button text="edit sets" color="green" />
           </Link>
         </div>

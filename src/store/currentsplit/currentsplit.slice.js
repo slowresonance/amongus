@@ -117,7 +117,30 @@ const initialState = {
   split_rest: false,
   is_archived: false,
   is_deleted: false,
-  summary: {},
+  summary: [
+    {
+      from: {
+        _id: "iubf39294uf",
+        name: "Rachana",
+      },
+      to: {
+        _id: "iubf39294uf",
+        name: "Mohan",
+      },
+      amount: 100,
+    },
+    {
+      from: {
+        _id: "iubf39294uf",
+        name: "Rachana",
+      },
+      to: {
+        _id: "iubf39294uf",
+        name: "Mohan",
+      },
+      amount: 100,
+    },
+  ],
 };
 
 export const currentSplitSlice = createSlice({
