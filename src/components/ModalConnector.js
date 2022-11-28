@@ -1,110 +1,134 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-
-import ModalOverlay from "./ModalOverlay";
-import Input from "./Input";
-import ContactsSelector from "./ContactsSelector";
-import Adjustments from "./Adjustments";
-
-import { setProperty } from "../store/currentsplit/currentsplit.slice";
+import TotalModal from "./modals/TotalModal";
+import PayerModal from "./modals/PayerModal";
+import ParticipantsModal from "./modals/ParticipantsModal";
+import AdjustmentsModal from "./modals/AdjustmentsModal";
+import SetExpressionModal from "./modals/SetExpressionModal";
+import SetParticipantsModal from "./modals/SetParticipantsModal";
 
 const StyledModalConnector = styled.div`
   white-space: nowrap;
-  padding: 4px 15px 5px;
-  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px 10px;
 
-  color: rgba(209, 194, 139, 1);
-  background-color: rgba(234, 214, 143, 0.13);
+  .text {
+    display: inline-block;
+    color: rgba(209, 194, 139, 1);
+    background-color: rgba(234, 214, 143, 0.13);
 
-  color: var(--color);
-  background-color: var(--background-color);
+    color: var(--color);
+    background-color: var(--background-color);
 
-  cursor: pointer;
-  border-radius: ${({ rounded }) => (rounded ? "30px" : "4px")};
+    padding: 4px 15px 5px;
+    border-radius: 4px;
 
-  font-weight: 400;
+    cursor: pointer;
+    border-radius: ${({ rounded }) => (rounded ? "30px" : "4px")};
+
+    font-weight: 400;
+  }
 `;
 
-const parseProperty = (property, value, placeholder) => {
+const parsePayer = (payer) => {
+  if (payer.length === 0) return ["payer"];
+  if (payer[0]._id === "iubf39294uf") return ["You"];
+  return [payer[0].name];
+};
+
+const parseParticipants = (participants) => {
+  const n = 3;
+  const o = 2;
+
+  if (participants.length === 0) return ["participants"];
+  let selfIncluded = false;
+  const participantsNames = participants.map((participant) => {
+    if (participant._id === "iubf39294uf") {
+      selfIncluded = true;
+      return "you";
+    }
+    return participant.name;
+  });
+
+  const withoutYou = participantsNames.filter((name) => name !== "you");
+
+  const first = withoutYou.slice(0, n);
+  const last = withoutYou.slice(n, n + o);
+  const rest = withoutYou.slice(n + o);
+
+  const res = [];
+  res.push(`${selfIncluded ? "You, " : ""}${first.join(", ")}`);
+  if (last.length > 0)
+    res.push(
+      `${last.join(", ")} ${rest.length > 0 ? `and ${rest.length} others` : ""}`
+    );
+
+  return res;
+};
+
+const parseValue = (value, property) => {
   switch (property) {
-    case "amount":
-      return value === 0 ? placeholder : value;
+    case "total_amount":
+      return value === 0 ? ["total"] : [value];
     case "payer":
-      return value === "" ? placeholder : value;
+      return parsePayer(value);
     case "participants":
-      return value.length === 0 ? placeholder : value;
+      return parseParticipants(value);
     case "adjustments":
-      return value.length === 0 ? placeholder : value;
+      return ["edit adjustments"];
+    case "set_expression":
+      return value === "" ? ["expression"] : [value];
+    case "set_participants":
+      return parseParticipants(value);
     default:
-      return value === "" ? placeholder : value;
+      return value;
   }
 };
 
-const ModalConnector = ({
-  placeholder,
-  color,
-  modalType,
-  property,
-  type,
-  rounded,
-}) => {
+const ModalConnector = ({ value, label, property, color, rounded, index }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const dispatch = useDispatch();
+  const [textArray, setTextArray] = useState(parseValue(value, property));
 
-  const value = useSelector((state) => state.currentSplit[property]);
-  const [text, setText] = useState(parseProperty(property, value, placeholder));
-
-  const handleClose = (value) => {
+  const closeModal = () => {
     setModalOpen(false);
-    dispatch(
-      setProperty({
-        key: property,
-        value: value,
-      })
-    );
   };
 
   useEffect(() => {
-    setText(parseProperty(property, value, placeholder));
+    setTextArray(parseValue(value, property));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   const modalSwitch = () => {
-    switch (modalType) {
-      case "number":
-        return (
-          <ModalOverlay onClose={() => setModalOpen(false)}>
-            <Input
-              initialValue={value}
-              placeholder={placeholder}
-              color={color}
-              onClose={handleClose}
-            />
-          </ModalOverlay>
-        );
-      case "contacts":
-        return (
-          <ModalOverlay onClose={() => setModalOpen(false)}>
-            <ContactsSelector
-              initialValue={value}
-              color={color}
-              onClose={handleClose}
-              type={type}
-            />
-          </ModalOverlay>
-        );
+    switch (property) {
+      case "total_amount":
+        return <TotalModal closeModal={closeModal} color={color} />;
+      case "payer":
+        return <PayerModal closeModal={closeModal} color={color} />;
+      case "participants":
+        return <ParticipantsModal closeModal={closeModal} color={color} />;
       case "adjustments":
+        return <AdjustmentsModal closeModal={closeModal} color={color} />;
+      case "set_expression":
         return (
-          <ModalOverlay onClose={() => setModalOpen(false)}>
-            <Adjustments
-              initialValue={value}
-              color={color}
-              onClose={handleClose}
-            />
-          </ModalOverlay>
+          <SetExpressionModal
+            closeModal={closeModal}
+            color={color}
+            index={index}
+          />
+        );
+      case "set_participants":
+        return (
+          <SetParticipantsModal
+            closeModal={closeModal}
+            color={color}
+            index={index}
+          />
         );
       default:
-        return <></>;
+        return null;
     }
   };
 
@@ -120,7 +144,12 @@ const ModalConnector = ({
           setModalOpen(true);
         }}
       >
-        {text}
+        {label !== "" && <div className="label">{label}</div>}
+        {textArray.map((text) => (
+          <div className="text" key={text}>
+            {text}
+          </div>
+        ))}
       </StyledModalConnector>
       {modalOpen && modalSwitch()}
     </>

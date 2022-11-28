@@ -7,7 +7,13 @@ import "./assets/fonts/fonts.css";
 import { store } from "./store/index";
 import { Provider } from "react-redux";
 
+import { BrowserRouter as Router } from "react-router-dom";
+
 const GlobalStyle = createGlobalStyle`
+
+  a {
+    text-decoration: none;
+  }
 
   * {
     margin: 0;
@@ -49,15 +55,37 @@ const GlobalStyle = createGlobalStyle`
     background-color: #151515;
     position: relative;
   }
+
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    border-radius: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    height: 56px;
+    border-radius: 8px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    background-color: #888;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
 `;
 
 const app = ReactDOM.createRoot(document.getElementById("app"));
 
 <React.StrictMode>
   {app.render(
-    <Provider store={store}>
-      <GlobalStyle />
-      <App />
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <GlobalStyle />
+        <App />
+      </Provider>
+    </Router>
   )}
 </React.StrictMode>;

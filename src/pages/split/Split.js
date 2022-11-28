@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "../../components/Button";
 import ModalConnector from "../../components/ModalConnector";
 import { useSelector } from "react-redux";
-import ModalOverlay from "../../components/ModalOverlay";
+import { Link } from "react-router-dom";
 
 const StyledSplit = styled.div`
   .header {
@@ -32,7 +32,7 @@ const StyledSplit = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    gap: 15px 10px;
+    gap: 14px 10px;
     margin: 40px 0;
   }
 
@@ -57,7 +57,7 @@ const StyledSplit = styled.div`
 `;
 
 const Menu = () => {
-  return <div className="menu">by groups</div>;
+  return <div className="menu">by sets</div>;
 };
 
 const Split = () => {
@@ -70,52 +70,42 @@ const Split = () => {
       </div>
 
       <div className="details">
-        <div className="group">
-          <div className="label">Amount</div>
-          <ModalConnector
-            placeholder="total"
-            color="yellow"
-            modalType="number"
-            property="amount"
-            rounded={false}
-          />
-        </div>
-        <div className="group">
-          <div className="label">paid by</div>
-          <ModalConnector
-            type="single"
-            placeholder="payer"
-            color="yellow"
-            modalType="contacts"
-            property="payer"
-            rounded={false}
-          />
-        </div>
+        <ModalConnector
+          value={useSelector((state) => state.currentSplit.total_amount)}
+          label="Amount"
+          property="total_amount"
+          rounded={false}
+          color="yellow"
+        />
+        <ModalConnector
+          value={useSelector((state) => state.currentSplit.payer)}
+          label="paid by"
+          color="yellow"
+          property="payer"
+          rounded={false}
+        />
         and
-        <div className="group">
-          <div className="label">split among</div>
-          <ModalConnector
-            type="multi"
-            placeholder="add participants"
-            color="yellow"
-            modalType="contacts"
-            property="participants"
-            rounded={false}
-          />
-        </div>
+        <ModalConnector
+          value={useSelector((state) => state.currentSplit.participants)}
+          label={"split among"}
+          color="yellow"
+          property="participants"
+          rounded={false}
+        />
       </div>
 
       <div className="options">
         <div className="group">
           <Menu />
-          <Button text="edit groups" color="green" />
+          <Link to="/sets">
+            <Button text="edit sets" color="green" />
+          </Link>
         </div>
         <div className="group">
           <div className="toggle">adjustments</div>
           <ModalConnector
-            placeholder="edit adjustments"
+            label=""
             color="cyan"
-            modalType="adjustments"
             property="adjustments"
             rounded={true}
           />

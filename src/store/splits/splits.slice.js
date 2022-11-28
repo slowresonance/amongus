@@ -1,15 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  splits: [],
-};
+const initialState = [];
 
 export const splitsSlice = createSlice({
   name: "splits",
   initialState,
   reducers: {
     addSplit: (state, action) => {
-      state.splits.push(action.payload);
+      state.push(action.payload);
     },
   },
 });

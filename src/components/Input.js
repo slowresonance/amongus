@@ -46,8 +46,7 @@ const Input = ({ type, initialValue, placeholder, color, onClose }) => {
   const [value, setValue] = useState(initialValue || "");
 
   const handleClose = () => {
-    const parsedValue = type === "number" ? parseInt(value) : value;
-    onClose(parsedValue);
+    onClose(String(value));
   };
 
   const handleKeydown = (e) => {
@@ -55,7 +54,8 @@ const Input = ({ type, initialValue, placeholder, color, onClose }) => {
       handleClose();
     }
     if (e.key === "Escape") {
-      onClose(initialValue);
+      console.log("first");
+      onClose(String(initialValue));
     }
   };
 

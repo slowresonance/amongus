@@ -16,13 +16,12 @@ const StyledModalOverlay = styled.div`
   z-index: 100;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
-  display: flex;
+  padding-top: 10vh;
 `;
 
 const ModalOverlay = ({ children }) => {
-  console.log("Hello");
   return ReactDom.createPortal(
     <StyledModalOverlay>{children}</StyledModalOverlay>,
     document.getElementById("overlay-portal")

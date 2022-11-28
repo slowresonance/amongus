@@ -1,48 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-
-const people = [
-  {
-    name: "Mohan",
-    amount: 100,
-    adjustment: 0,
-  },
-  {
-    name: "Rachana",
-    amount: 100,
-    adjustment: 20,
-  },
-  {
-    name: "Manisha",
-    amount: 100,
-    adjustment: 150,
-  },
-  {
-    name: "Sonika",
-    amount: 100,
-    adjustment: 0,
-  },
-  {
-    name: "Bhargav",
-    amount: 100,
-    adjustment: 0,
-  },
-  {
-    name: "Lakshit",
-    amount: 100,
-    adjustment: 0,
-  },
-  {
-    name: "Satya",
-    amount: 100,
-    adjustment: 0,
-  },
-  {
-    name: "Suprith",
-    amount: 100,
-    adjustment: 0,
-  },
-];
+import { useDispatch } from "react-redux";
+import { setAdjustment } from "../store/currentsplit/currentsplit.slice";
 
 const StyledAdjustments = styled.div`
   width: 330px;
@@ -112,51 +71,91 @@ const StyledAdjustments = styled.div`
       }
 
       .amount {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        input {
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
-        border-radius: 4px;
+          font-size: 16px;
+          font-family: "Fira Code", monospace;
 
-        color: rgba(139, 197, 209, 1);
-        background-color: rgba(143, 212, 234, 0.13);
-        height: 27px;
-        width: 70px;
+          border-radius: 4px;
+          text-align: center;
 
-        cursor: text;
+          color: rgba(139, 197, 209, 1);
+          background-color: rgba(143, 212, 234, 0.13);
+          height: 27px;
+          width: 70px;
+
+          cursor: text;
+
+          border: none;
+          outline: none;
+        }
       }
     }
+  }
+  .message-board {
+    text-align: center;
+    padding: 2em 0;
+    color: rgba(117, 117, 117, 1);
   }
 `;
 
 const Adjustments = ({ initialValue, onClose }) => {
-  const handleClose = () => {
-    onClose(initialValue);
+  const adjustments = initialValue;
+  const dispatch = useDispatch();
+
+  const handleDone = () => {
+    onClose();
+  };
+
+  const handleAdjustmentChange = (index, adjustment) => {
+    adjustment = adjustment === "" ? 0 : parseInt(adjustment);
+    dispatch(
+      setAdjustment({
+        index: index,
+        key: "adjustment",
+        value: adjustment,
+      })
+    );
   };
 
   return (
     <StyledAdjustments>
       <div className="header">
         <div className="title">Adjustments</div>
-        <div className="done" onClick={handleClose}>
+        <div className="done" onClick={handleDone}>
           Done
         </div>
       </div>
       <div className="body">
-        <div className="people">
-          {people.map((person) => (
-            <div className="details" key={person.name}>
-              <div className="person">
-                <div className="name">{person.name}</div>
-                <div className="total">({person.amount})</div>
+        {adjustments.length <= 0 ? (
+          <div className="message-board">Add participants to get started</div>
+        ) : (
+          <div className="people">
+            {adjustments.map((person, index) => (
+              <div className="details" key={person._id}>
+                <div className="person">
+                  <div className="name">{person.name}</div>
+                  {/* <div className="total">({person.amount})</div> */}
+                </div>
+                <div className="adjustment">
+                  <div className="plus">+</div>
+                  <div className="amount">
+                    <input
+                      type="text"
+                      defaultValue={person.adjustment}
+                      onKeyUp={(e) => {
+                        handleAdjustmentChange(index, e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="adjustment">
-                <div className="plus">+</div>
-                <div className="amount">{person.adjustment}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </StyledAdjustments>
   );
