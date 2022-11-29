@@ -1,23 +1,35 @@
-import SplitPage from "./pages/split/SplitPage";
-import GroupPage from "./pages/group/GroupPage";
-import SummaryPage from "./pages/summary/SummaryPage";
+import NewSplitPage from "./pages/newsplit/NewSplitPage";
+import GroupFeedPage from "./pages/groupfeed/GroupFeedPage";
 import SetsPage from "./pages/sets/SetsPage";
-import Gsummary from "./pages/gsummary/Gsummary";
-import Fsummary from "./pages/fsummary/Fsummary";
+import GroupsSummaryPage from "./pages/groupssummary/GroupsSummaryPage";
+import FriendsSummaryPage from "./pages/friendssummary/FriendsSummaryPage";
+import FriendSummaryPage from "./pages/friendsummary/FriendSummaryPage";
+import SplitSummaryPage from "./pages/splitsummary/SplitSummaryPage";
+import Menu from "./components/Menu";
+import Back from "./components/Back";
+
 import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
+      <Back />
       <Routes>
-        <Route path="/new-split" element={<SplitPage />} />
+        <Route path="/" element={<FriendsSummaryPage />} />
+
+        <Route path="/new-split" element={<NewSplitPage />} />
         <Route path="/new-split/sets" element={<SetsPage />} />
-        <Route path="/group/:gid" element={<GroupPage />} />
-        <Route path="/group/:gid/summary/:sid" element={<SummaryPage />} />
-        <Route path="/summary/:sid" element={<SummaryPage />} />
-        <Route path="/groups" element={<Gsummary />} />
-        <Route path="/friends" element={<Fsummary />} />
+
+        <Route path="/groups" element={<GroupsSummaryPage />} />
+
+        <Route path="/groups/:id" element={<GroupFeedPage />} />
+        <Route path="/groups/:id/summary/:id" element={<SplitSummaryPage />} />
+
+        <Route path="/friends" element={<FriendsSummaryPage />} />
+
+        <Route path="/friends/:id" element={<FriendSummaryPage />} />
       </Routes>
+      <Menu />
     </>
   );
 }

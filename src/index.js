@@ -10,11 +10,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
-
-  a {
-    text-decoration: none;
-  }
-
   * {
     margin: 0;
     padding: 0;
@@ -31,6 +26,14 @@ const GlobalStyle = createGlobalStyle`
 
     --red-color: rgba(239, 132, 93, 1);
     --red-background-color: rgba(255, 144, 109, 0.13);
+
+    --white-color: rgba(255, 255, 255, 1);
+    --white-background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   body {
@@ -50,10 +53,18 @@ const GlobalStyle = createGlobalStyle`
   #root {
     width: 430px;
     height: 900px;
-    padding: 20px;
+    padding: 20px 5px 20px 20px;
 
     background-color: #151515;
     position: relative;
+
+  }
+
+  #app {
+    max-height: 700px;
+    overflow-y: scroll;
+
+    margin-top: 160px;
   }
 
   *::-webkit-scrollbar {
@@ -69,11 +80,11 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 8px;
     border: 4px solid transparent;
     background-clip: content-box;
-    background-color: #888;
+    background-color: #151515;
   }
 
   *::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
+    background-color: #151515;
   }
 `;
 

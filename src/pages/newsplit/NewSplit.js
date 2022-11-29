@@ -5,12 +5,12 @@ import ModalConnector from "../../components/ModalConnector";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const StyledSplit = styled.div`
+const StyledNewSplit = styled.div`
   .header {
     display: flex;
     gap: 10px;
 
-    margin: 80px 0;
+    margin-bottom: 80px;
 
     .title.item {
       color: rgba(255, 255, 255, 0.7);
@@ -60,9 +60,9 @@ const Menu = () => {
   return <div className="menu">by sets</div>;
 };
 
-const Split = () => {
+const NewSplit = () => {
   return (
-    <StyledSplit>
+    <StyledNewSplit>
       <div className="header">
         <div className="title item">Lunch</div>
         <div className="item">+ images</div>
@@ -111,8 +111,8 @@ const Split = () => {
           />
         </div>
       </div>
-    </StyledSplit>
+    </StyledNewSplit>
   );
 };
 
-export default Split;
+export default NewSplit;

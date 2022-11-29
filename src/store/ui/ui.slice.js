@@ -1,24 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  inputModal: {
-    open: false,
-  },
+  menu: [
+    {
+      name: "New Split",
+      path: "/new-split",
+    },
+    {
+      name: "Groups",
+      path: "/groups",
+    },
+    {
+      name: "Friends",
+      path: "/friends",
+    },
+  ],
+  history: [],
 };
 
-export const uiSlice = createSlice({
+const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    openInputModal: (state, action) => {
-      state.inputModal.open = true;
-    },
-    closeInputModal: (state, action) => {
-      state.inputModal.open = false;
+    setMenu: (state, action) => {
+      state.menu = action.payload;
     },
   },
 });
 
-export const { openInputModal, closeInputModal } = uiSlice.actions;
+export const { setMenu } = uiSlice.actions;
 
 export default uiSlice.reducer;

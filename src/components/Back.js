@@ -7,7 +7,8 @@ const StyledBack = styled.div`
   flex-direction: row;
   align-items: center;
 
-  margin: 80px 0;
+  position: absolute;
+  top: 40px;
 
   .back {
     display: flex;
@@ -20,13 +21,13 @@ const StyledBack = styled.div`
   }
 `;
 
-const Back = ({ text, path }) => {
+const Back = ({ path }) => {
   return (
     <StyledBack>
       <Link to={path}>
         <div className="back">
           <div className="arrow"></div>
-          <div className="text">{text}</div>
+          <div className="text">Go Back</div>
         </div>
       </Link>
     </StyledBack>

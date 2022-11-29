@@ -422,7 +422,7 @@ const r = {
       adjustment: 500,
     },
   ],
-  split_method: "equal",
+  split_method: "equally",
   sets: [
     {
       _id: "",
@@ -510,6 +510,10 @@ const r = {
     },
     owed: 0,
     owe: 287,
+    payer: {
+      _id: "",
+      name: "Rachana",
+    },
     statements: [
       {
         _id: "",

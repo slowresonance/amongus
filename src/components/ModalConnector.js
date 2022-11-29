@@ -6,6 +6,7 @@ import ParticipantsModal from "./modals/ParticipantsModal";
 import AdjustmentsModal from "./modals/AdjustmentsModal";
 import SetExpressionModal from "./modals/SetExpressionModal";
 import SetParticipantsModal from "./modals/SetParticipantsModal";
+import { useSelector } from "react-redux";
 
 const StyledModalConnector = styled.div`
   white-space: nowrap;
@@ -69,14 +70,14 @@ const parseParticipants = (participants) => {
   return res;
 };
 
-const parseValue = (value, property) => {
+const parseValue = (value, property, user) => {
   switch (property) {
     case "total_amount":
       return value === 0 ? ["total"] : [value];
     case "payer":
-      return parsePayer(value);
+      return parsePayer(value, user);
     case "participants":
-      return parseParticipants(value);
+      return parseParticipants(value, user);
     case "adjustments":
       return ["edit adjustments"];
     case "set_expression":

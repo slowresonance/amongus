@@ -3,142 +3,55 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   _id: "",
-  group_id: "",
   name: "",
+  is_group: true,
+  group: {
+    _id: "",
+    name: "",
+  },
   total_amount: 0,
-  // created_on: "2021-11-13",
-  // created_by: "iubf39294uf",
+  created_on: 0,
+  created_by: {
+    _id: "",
+    name: "",
+  },
   payer: [],
-  participants: [
-    // {
-    //   _id: "iubf3s9d294uf",
-    //   name: "Rachana",
-    //   amount: 150,
-    // },
-    // {
-    //   _id: "iubsdf39294uf",
-    //   name: "Kavya",
-    //   amount: 0,
-    // },
-    // {
-    //   _id: "ieubfs39294uf",
-    //   name: "Joshua",
-    //   amount: 50,
-    // },
-    // {
-    //   _id: "iubrf39294suf",
-    //   name: "Rachana",
-    //   amount: 250,
-    // },
-  ],
+  participants: [],
   method: "equally",
   sets: [
     {
-      _id: "iubf39294uf",
+      _id: "",
       expression: "",
-      participants: [
-        // {
-        //   _id: "iubf39294uf",
-        //   name: "Rachana",
-        // },
-        // {
-        //   _id: "iubf39294uf",
-        //   name: "Rachana",
-        // },
-        // {
-        //   _id: "iubf39294uf",
-        //   name: "Rachana",
-        // },
-      ],
+      amount: 0,
+      participants: [],
     },
     {
-      _id: "iubfd39294uf",
+      _id: "",
       expression: "",
-      participants: [
-        // {
-        //   _id: "iubf39294uf",
-        //   name: "Rachana",
-        // },
-        // {
-        //   _id: "iubf39294uf",
-        //   name: "Rachana",
-        // },
-        // {
-        //   _id: "iubf39294uf",
-        //   name: "Rachana",
-        // },
-      ],
+      amount: 0,
+      participants: [],
     },
   ],
-  percentages: [
-    // {
-    //   _id: "iubf39294uf",
-    //   name: "Rachana",
-    //   percentage: 10,
-    // },
-    // {
-    //   _id: "iubf39294uf",
-    //   name: "Rachana",
-    //   percentage: 20,
-    // },
-    // {
-    //   _id: "iubf39294uf",
-    //   name: "Rachana",
-    //   percentage: 30,
-    // },
-    // {
-    //   _id: "iubf39294uf",
-    //   name: "Rachana",
-    //   percentage: 40,
-    // },
-  ],
-  shares: [
-    // {
-    //   _id: "iubf39294uf",
-    //   name: "Rachana",
-    //   shares: 2,
-    // },
-    // {
-    //   _id: "iubf39294uf",
-    //   name: "Rachana",
-    //   shares: 1,
-    // },
-    // {
-    //   _id: "iubf39294uf",
-    //   name: "Rachana",
-    //   shares: 1,
-    // },
-    // {
-    //   _id: "iubf39294uf",
-    //   name: "Rachana",
-    //   shares: 3,
-    // },
-  ],
+  percentages: [],
+  shares: [],
   split_rest: false,
   is_archived: false,
-  is_deleted: false,
   summary: [
     {
-      from: {
-        _id: "iubf39294uf",
-        name: "Rachana",
+      _id: "",
+      name: "",
+      is_group: true,
+      group: {
+        _id: "",
+        name: "",
       },
-      to: {
-        _id: "iubf39294uf",
-        name: "Mohan",
+      payer: {
+        _id: "",
+        name: "",
       },
-      amount: 100,
-    },
-    {
-      from: {
-        _id: "iubf39294uf",
-        name: "Rachana",
-      },
-      to: {
-        _id: "iubf39294uf",
-        name: "Mohan",
-      },
-      amount: 100,
+      owed: 0,
+      owe: 0,
+      statements: [],
     },
   ],
 };

@@ -133,7 +133,7 @@ const ContactsSelector = ({ type, initialValue, color, onClose }) => {
   const [selectedIds, setSelectedIds] = useState([]);
 
   const [results, setResults] = useState(
-    useSelector((state) => state.contacts) || []
+    useSelector((state) => state.user.contacts) || []
   );
 
   const handleClose = () => {

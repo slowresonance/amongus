@@ -1,11 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  _id: "",
-  name: "",
-  email: "",
-  contacts: [],
-  groups: [],
+  _id: "iubf39294uf",
+  name: "Mohan",
+  email: "mohanvpatta@gmail.com",
+  contacts: [
+    {
+      _id: "iubf39294uf",
+      name: "You",
+    },
+    {
+      _id: "2973yss922f2dsy",
+      name: "Rachana",
+    },
+    {
+      _id: "297s3y922f2dy",
+      name: "Joshua",
+    },
+    {
+      _id: "297s3ysd3ss922f2dy",
+      name: "Kavya",
+    },
+    {
+      _id: "2973ysss94322f2dy",
+      name: "Sonika",
+    },
+    {
+      _id: "ieyfb83s72323d",
+      name: "Manisha",
+    },
+    {
+      _id: "wrfoisun4nb",
+      name: "Lakshit",
+    },
+  ],
+  groups: [
+    {
+      _id: "non-group",
+      name: "Non-Group Expenses",
+    },
+    {
+      _id: "iubf39294uf",
+      name: "A short trip to Kerala",
+    },
+  ],
 };
 
 const userSlice = createSlice({
