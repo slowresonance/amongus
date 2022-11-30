@@ -18,18 +18,24 @@ const StyledBack = styled.div`
 
     color: rgba(255, 255, 255, 0.7);
     background-color: rgba(255, 255, 255, 0.06);
+
+    cursor: pointer;
   }
 `;
+
+const handleClick = () => {
+  window.history.back();
+};
 
 const Back = ({ path }) => {
   return (
     <StyledBack>
-      <Link to={path}>
-        <div className="back">
-          <div className="arrow"></div>
-          <div className="text">Go Back</div>
-        </div>
-      </Link>
+      {/* <Link to={path}> */}
+      <div className="back" onClick={handleClick}>
+        <div className="arrow"></div>
+        <div className="text">Go Back</div>
+      </div>
+      {/* </Link> */}
     </StyledBack>
   );
 };

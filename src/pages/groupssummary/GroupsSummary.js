@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { abs } from "mathjs";
 
+import { Link } from "react-router-dom";
+
 import Button from "../../components/Button";
 
 const StyledGroupsSummary = styled.div`
@@ -138,29 +140,31 @@ const GroupBalance = (person) => {
 };
 
 const GroupShortSummary = (group) => {
-  const { name, owed, owe, summary } = group;
+  const { _id, name, owed, owe, summary } = group;
   const amount = owed - owe;
 
   return (
-    <div className="group">
-      <div className="top">
-        <div className="name">{name}</div>
-        <div
-          className={`involvement ${
-            amount !== 0 && amount > 0 ? "lent" : "borrow"
-          }`}
-        >
-          {abs(amount)}
+    <Link to={`/groups/${_id}`}>
+      <div className="group">
+        <div className="top">
+          <div className="name">{name}</div>
+          <div
+            className={`involvement ${
+              amount !== 0 && amount > 0 ? "lent" : "borrow"
+            }`}
+          >
+            {abs(amount)}
+          </div>
+        </div>
+        <div className="bottom">
+          <div className="balances">
+            {summary.map((person) => (
+              <GroupBalance key={person._id} {...person} />
+            ))}
+          </div>
         </div>
       </div>
-      <div className="bottom">
-        <div className="balances">
-          {summary.map((person) => (
-            <GroupBalance key={person._id} {...person} />
-          ))}
-        </div>
-      </div>
-    </div>
+    </Link>
   );
 };
 

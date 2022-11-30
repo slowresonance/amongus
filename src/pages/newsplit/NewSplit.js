@@ -191,13 +191,10 @@ function getSplitSummaryInfo(expense, group, user) {
 
       if (isPayer(user.name, expense) && isSpliterinSet(state.name, set)) {
         state.owed += set_split;
-        // console.log("CHECK" + state.owed, set_split, user.name, state.name);
       } else if (
         isPayer(state.name, expense) &&
         isSpliterinSet(user.name, set)
       ) {
-        // console.log("CHECK" + state.owed, set_split, user.name, state.name);
-
         state.owe += set_split;
       }
     }
