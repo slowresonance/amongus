@@ -17,17 +17,17 @@ const initialState = {
   },
   payer: [],
   participants: [],
-  method: "equally",
+  split_method: "equally",
   sets: [
     {
       _id: "",
-      expression: "",
+      expression: 0,
       amount: 0,
       participants: [],
     },
     {
       _id: "",
-      expression: "",
+      expression: 0,
       amount: 0,
       participants: [],
     },
@@ -80,6 +80,9 @@ export const currentSplitSlice = createSlice({
         expression: "",
         participants: [],
       });
+    },
+    updateAmount: (state, action) => {
+      state["sets"][action.payload.index]["amount"] = action.payload.amount;
     },
   },
 });

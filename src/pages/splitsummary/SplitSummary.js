@@ -89,12 +89,21 @@ const GroupBalance = (person) => {
   );
 };
 
-const SplitSummary = () => {
-  const [groupId, splitId] = ["iubf39294uf", "wefef2342fef32"];
+const SplitSummary = ({ id }) => {
+  const [groupId, splitId] = ["iubf39294uf", id];
   const groups = useSelector((state) => state.groups);
 
-  const group = groups.find((group) => group._id === groupId);
-  const split = group.splits.find((split) => split._id === splitId);
+  let split = {};
+
+  console.log(groups);
+
+  for (let group of groups) {
+    for (let s of group.splits) {
+      if (s._id === splitId) {
+        split = s;
+      }
+    }
+  }
 
   console.log(split);
 

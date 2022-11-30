@@ -165,8 +165,8 @@ const Split = (split) => {
   );
 };
 
-const GroupFeed = () => {
-  const groupId = "iubf39294uf";
+const GroupFeed = ({ id }) => {
+  const groupId = id;
   const groups = useSelector((state) => state.groups);
 
   const group = groups.find((group) => group._id === groupId);

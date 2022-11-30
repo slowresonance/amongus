@@ -19,6 +19,13 @@ const SetExpressionModal = ({ closeModal, color, index }) => {
         value: value,
       })
     );
+    dispatch(
+      setSetProperty({
+        index: index,
+        key: "amount",
+        value: evaluate(value),
+      })
+    );
     closeModal();
   };
   return (
