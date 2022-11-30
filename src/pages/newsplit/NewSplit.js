@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "../../components/Button";
 import ModalConnector from "../../components/ModalConnector";
@@ -7,10 +7,15 @@ import { Link } from "react-router-dom";
 import { addSplit } from "./../../store/groups/groups.slice";
 
 const StyledNewSplit = styled.div`
-  .button-wrapper {
+  .button-wrapper,
+  .result {
     margin-top: 40px;
     display: flex;
     justify-content: center;
+  }
+
+  .result {
+    margin-top: 20px;
   }
 
   .header {
@@ -76,10 +81,15 @@ function getNewSplitSummary(expense, group, user) {
     name: expense.name,
     is_group: expense.is_group,
     created_on: expense.created_on,
+    payer: {
+      _id: "",
+      name: "",
+    },
     group: {
       _id: group._id,
       name: group.name,
     },
+    amoun: 0,
     owed: 0,
     owe: 0,
     statements: [],
@@ -131,7 +141,6 @@ function addToGroupSummary(split_sum, group) {
 
 // Checks if certain user is paying for an expense
 function isPayer(name, expense) {
-  console.log("PAY", expense.payer[0].name, name);
   return expense.payer[0].name === name;
 }
 
@@ -163,7 +172,7 @@ function getSplitSummaryInfo(expense, group, user) {
   let total_amt = expense.total_amount;
   let participants = expense.participants;
 
-  console.log("💀", expense);
+  split_summary.amount = total_amt;
 
   let statement = split_summary.statements;
 
@@ -176,8 +185,10 @@ function getSplitSummaryInfo(expense, group, user) {
     let set_split = set_amt / set.participants.length;
 
     for (let state of statement) {
-      console.log("CHECK", expense);
-      console.log("CCCCHECK", isPayer(user.name, expense));
+      if (isPayer(user.name, expense)) {
+        split_summary.payer.name = user.name;
+      }
+
       if (isPayer(user.name, expense) && isSpliterinSet(state.name, set)) {
         state.owed += set_split;
         // console.log("CHECK" + state.owed, set_split, user.name, state.name);
@@ -245,6 +256,8 @@ const NewSplit = () => {
   let split_dup = JSON.parse(JSON.stringify(split));
   let user_dup = JSON.parse(JSON.stringify(user));
 
+  const [resOpen, setResOpen] = useState(false);
+
   return (
     <StyledNewSplit>
       <div className="header">
@@ -299,12 +312,19 @@ const NewSplit = () => {
       <div
         className="button-wrapper"
         onClick={() => {
+          setResOpen(true);
           dispatch(addSplit(handleDone(split_dup, group_dup, user_dup)));
         }}
       >
         <Button text="Done" color="white"></Button>
-        <Link to="/groups/iubf39294uf/summary/thisone">View Summary</Link>
       </div>
+      {resOpen && (
+        <div className="result">
+          <Link to="/groups/iubf39294uf/summary/thisone">
+            <Button color="green" text="View Summary" />
+          </Link>
+        </div>
+      )}
     </StyledNewSplit>
   );
 };
