@@ -143,9 +143,12 @@ export const groupsSlice = createSlice({
         state[index] = action.payload;
       }
     },
+    addSplit: (state, action) => {
+      state[1].splits.push(action.payload);
+    },
   },
 });
 
-export const { addGroup } = groupsSlice.actions;
+export const { addGroup, addSplit } = groupsSlice.actions;
 
 export default groupsSlice.reducer;

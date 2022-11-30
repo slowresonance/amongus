@@ -7,7 +7,7 @@ const initialState = {
   contacts: [
     {
       _id: "iubf39294uf",
-      name: "You",
+      name: "Mohan",
     },
     {
       _id: "2973yss922f2dsy",

@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../../components/Button";
 import ModalConnector from "../../components/ModalConnector";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addSplit } from "./../../store/groups/groups.slice";
 
 const StyledNewSplit = styled.div`
   .button-wrapper {
@@ -130,7 +131,8 @@ function addToGroupSummary(split_sum, group) {
 
 // Checks if certain user is paying for an expense
 function isPayer(name, expense) {
-  return expense.payer.name === name;
+  console.log("PAY", expense.payer[0].name, name);
+  return expense.payer[0].name === name;
 }
 
 // Checks if certain user is participating in a particular set of an expense
@@ -174,7 +176,8 @@ function getSplitSummaryInfo(expense, group, user) {
     let set_split = set_amt / set.participants.length;
 
     for (let state of statement) {
-      console.log("CHECK", isPayer(state.name));
+      console.log("CHECK", expense);
+      console.log("CCCCHECK", isPayer(user.name, expense));
       if (isPayer(user.name, expense) && isSpliterinSet(state.name, set)) {
         state.owed += set_split;
         // console.log("CHECK" + state.owed, set_split, user.name, state.name);
@@ -221,13 +224,10 @@ const handleDone = (split, group, user) => {
 
   // Get New Split Summary Object
   let summary = getSplitSummaryInfo(split, group, user);
-
-  console.log(summary);
-
   // Add Split Summary info to Group Summary
   addToGroupSummary(summary, group);
 
-  console.log(group);
+  return summary;
 };
 
 const Menu = () => {
@@ -238,6 +238,8 @@ const NewSplit = () => {
   const group = useSelector((state) => state.groups)[1];
   const split = useSelector((state) => state.currentSplit);
   const user = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   let group_dup = JSON.parse(JSON.stringify(group));
   let split_dup = JSON.parse(JSON.stringify(split));
@@ -297,10 +299,11 @@ const NewSplit = () => {
       <div
         className="button-wrapper"
         onClick={() => {
-          handleDone(split_dup, group_dup, user_dup);
+          dispatch(addSplit(handleDone(split_dup, group_dup, user_dup)));
         }}
       >
         <Button text="Done" color="white"></Button>
+        <Link to="/groups/iubf39294uf/summary/thisone">View Summary</Link>
       </div>
     </StyledNewSplit>
   );

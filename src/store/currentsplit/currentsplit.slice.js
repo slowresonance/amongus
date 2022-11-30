@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // import { createRandomId } from "../../utils/Rand";
 
 const initialState = {
-  _id: "",
+  _id: "thisone",
   name: "",
   is_group: true,
   group: {
@@ -17,17 +17,17 @@ const initialState = {
   },
   payer: [],
   participants: [],
-  split_method: "equally",
+  method: "equally",
   sets: [
     {
       _id: "",
-      expression: 0,
+      expression: "",
       amount: 0,
       participants: [],
     },
     {
       _id: "",
-      expression: 0,
+      expression: "",
       amount: 0,
       participants: [],
     },
