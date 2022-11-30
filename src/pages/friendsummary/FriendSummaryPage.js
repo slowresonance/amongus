@@ -1,8 +1,10 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import FriendSummary from "./FriendSummary";
 
 const FriendSummaryPage = () => {
-  return <FriendSummary />;
+  const { id } = useParams();
+  return <FriendSummary id={id} />;
 };
 
 export default FriendSummaryPage;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { abs } from "mathjs";
@@ -149,6 +150,8 @@ const ContactsSummary = (contact) => {
   contact = contact.contact;
   if (contact.length === 0) return;
 
+  const id = contact[0]._id;
+
   const { name } = contact[0];
 
   let amount = 0;
@@ -158,25 +161,27 @@ const ContactsSummary = (contact) => {
   }
 
   return (
-    <div className="contact">
-      <div className="top">
-        <div className="name">{name}</div>
-        <div
-          className={`involvement ${
-            amount !== 0 && amount > 0 ? "lent" : "borrow"
-          }`}
-        >
-          {abs(amount)}
+    <Link to={`/friends/${id}`}>
+      <div className="contact">
+        <div className="top">
+          <div className="name">{name}</div>
+          <div
+            className={`involvement ${
+              amount !== 0 && amount > 0 ? "lent" : "borrow"
+            }`}
+          >
+            {abs(amount)}
+          </div>
+        </div>
+        <div className="bottom">
+          <div className="balances">
+            {contact.map((item) => (
+              <ContactBalance {...item} key={item.group_name} />
+            ))}
+          </div>
         </div>
       </div>
-      <div className="bottom">
-        <div className="balances">
-          {contact.map((item) => (
-            <ContactBalance {...item} key={item.group_name} />
-          ))}
-        </div>
-      </div>
-    </div>
+    </Link>
   );
 };
 

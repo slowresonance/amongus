@@ -84,11 +84,11 @@ const ContactBalance = ({ group_name, name, owe, owed }) => {
   );
 };
 
-const FriendSummary = () => {
+const FriendSummary = ({ id }) => {
   const contacts = useSelector((state) => state.user.contacts);
   const groups = useSelector((state) => state.groups);
 
-  const friendId = "2973yss922f2dsy";
+  const friendId = id;
 
   const spec = {};
 
