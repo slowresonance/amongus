@@ -136,32 +136,34 @@ const parseOwedOwe = (summary) => {
 };
 
 const Split = (split) => {
-  const { name, owe, owed } = split;
+  const { _id, name, owe, owed } = split;
   const amount = owe - owed;
   return (
-    <div className="split">
-      <div className="left">
-        <div className="title">{name}</div>
-        <div className="date">November 30, 2022</div>
-        {/* <div className="date">{created_on}</div> */}
-      </div>
-      <div className="right">
-        <div className="amount">
-          {amount === 0 && <></>}
-          {amount > 0 && (
-            <>
-              <div className="involvement lent">{abs(amount)}</div>
-            </>
-          )}
-          {amount < 0 && (
-            <>
-              <div className="involvement borrow">{abs(amount)}</div>
-            </>
-          )}
+    <Link to={`/groups/${split.groupId}/summary/${_id}`}>
+      <div className="split">
+        <div className="left">
+          <div className="title">{name}</div>
+          <div className="date">November 30, 2022</div>
+          {/* <div className="date">{created_on}</div> */}
         </div>
-        <div className="involvement-status">Not Involved</div>
+        <div className="right">
+          <div className="amount">
+            {amount === 0 && <></>}
+            {amount > 0 && (
+              <>
+                <div className="involvement lent">{abs(amount)}</div>
+              </>
+            )}
+            {amount < 0 && (
+              <>
+                <div className="involvement borrow">{abs(amount)}</div>
+              </>
+            )}
+          </div>
+          <div className="involvement-status">Not Involved</div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

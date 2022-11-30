@@ -90,7 +90,7 @@ const GroupBalance = (person) => {
 };
 
 const SplitSummary = ({ id }) => {
-  const [groupId, splitId] = ["iubf39294uf", id];
+  const splitId = id;
   const groups = useSelector((state) => state.groups);
 
   let split = {};
@@ -105,7 +105,7 @@ const SplitSummary = ({ id }) => {
     }
   }
 
-  console.log(split);
+  console.log(splitId);
 
   return (
     <StyledSplitSummary>
