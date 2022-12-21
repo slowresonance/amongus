@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const StyledBack = styled.div`
   display: flex;
@@ -28,13 +28,26 @@ const handleClick = () => {
 };
 
 const Back = ({ path }) => {
+  const location = useLocation();
+  console.log(location);
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setShow(false);
+    } else {
+      setShow(true);
+    }
+  }, [location]);
+
   return (
-    <StyledBack>
-      <div className="back" onClick={handleClick}>
-        <div className="arrow"></div>
-        <div className="text">Go Back</div>
-      </div>
-    </StyledBack>
+    show && (
+      <StyledBack>
+        <div className="back" onClick={handleClick}>
+          <div className="arrow"></div>
+          <div className="text">Go Back</div>
+        </div>
+      </StyledBack>
+    )
   );
 };
 
