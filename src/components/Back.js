@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -30,12 +30,10 @@ const handleClick = () => {
 const Back = ({ path }) => {
   return (
     <StyledBack>
-      {/* <Link to={path}> */}
       <div className="back" onClick={handleClick}>
         <div className="arrow"></div>
         <div className="text">Go Back</div>
       </div>
-      {/* </Link> */}
     </StyledBack>
   );
 };

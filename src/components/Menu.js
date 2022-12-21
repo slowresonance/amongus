@@ -31,7 +31,6 @@ const StyledMenu = styled.div`
 
 const Menu = () => {
   const { menu } = useSelector((state) => state.ui);
-  console.log(menu);
   return (
     <StyledMenu>
       {menu.map((item, index) => {

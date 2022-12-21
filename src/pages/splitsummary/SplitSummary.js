@@ -111,7 +111,7 @@ const SplitSummary = ({ id }) => {
     <StyledSplitSummary>
       <div className="header">
         <div className="title">Breakfast</div>
-        <div className="date">November 13, 2022</div>
+        <div className="date">December 22, 2022</div>
       </div>
       <div className="summary">
         <div className="title">Summary</div>
